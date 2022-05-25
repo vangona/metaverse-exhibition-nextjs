@@ -7,8 +7,8 @@ const Cube = () => {
 
   return (
     <mesh ref={mesh} position={[0, 0, 0]}>
-      <boxBufferGeometry attatch="geometry" />
-      <meshLambertMaterial attach="material" color="black" />
+      <boxBufferGeometry attach="geometry" />
+      <meshLambertMaterial attach="material" color="yellow" />
     </mesh>
   );
 };
