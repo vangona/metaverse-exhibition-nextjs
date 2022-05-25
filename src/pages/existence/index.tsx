@@ -1,18 +1,20 @@
 import { Canvas } from "@react-three/fiber";
 import { NextPage } from "next";
+import * as THREE from "three";
 import Lights from "components/three/Lights";
-import Cube from "components/three/Cube";
-import GLTFModel from "components/three/GLTFModel";
-import { OrbitControls } from "@react-three/drei";
+import Model from "components/three/Model";
+import { OrbitControls, useHelper } from "@react-three/drei";
+import Floor from "components/three/Floor";
 
 const Existence: NextPage = () => {
   return (
     <div id="three-container">
       <Canvas camera={{ position: [1, 1, 1] }}>
         <OrbitControls />
-        <Cube />
-        <GLTFModel />
+        <primitive object={new THREE.AxesHelper(10)} />
+        <Model />
         <Lights />
+        <Floor />
       </Canvas>
     </div>
   );
