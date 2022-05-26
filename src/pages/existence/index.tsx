@@ -3,12 +3,12 @@ import { NextPage } from "next";
 import * as THREE from "three";
 import Lights from "components/three/Lights";
 import Model from "components/three/Model";
-import { OrbitControls, useHelper } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import Floor from "components/three/Floor";
 
 const Existence: NextPage = () => {
   return (
-    <div id="three-container">
+    <div id="three-container" style={{ position: "relative" }}>
       <Canvas camera={{ position: [1, 1, 1] }}>
         <OrbitControls />
         <primitive object={new THREE.AxesHelper(10)} />
