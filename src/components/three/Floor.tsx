@@ -2,9 +2,9 @@ import * as THREE from "three";
 
 const Wall = () => {
   return (
-    <mesh rotation={new THREE.Euler(Math.PI / 2, 0, 0)} castShadow={true}>
+    <mesh receiveShadow={true} rotation={new THREE.Euler(Math.PI / 2, 0, 0)}>
       <planeBufferGeometry args={[100, 100, 100]} />
-      <meshPhongMaterial color={new THREE.Color("navy")} />
+      <meshLambertMaterial color={new THREE.Color("navy")} />
     </mesh>
   );
 };
