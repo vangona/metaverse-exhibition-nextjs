@@ -1,6 +1,6 @@
 export interface animationStateActionType {
   type: string;
-  data: boolean[];
+  payload: boolean[];
 }
 
 export type animationStateType = boolean[];

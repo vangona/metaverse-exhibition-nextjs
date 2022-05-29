@@ -1,7 +1,8 @@
 import { useFBX } from "@react-three/drei";
+import { FunctionComponent } from "react";
 import * as THREE from "three";
 
-export default function Model() {
+const ExistenceModel: FunctionComponent = () => {
   const ANIMATION_DURATION: number = 2;
 
   const fbx = useFBX("withbooks.fbx");
@@ -55,10 +56,12 @@ export default function Model() {
   animate();
 
   return (
-    <group>
+    <>
       <primitive object={fbx} />
-    </group>
+    </>
   );
-}
+};
 
 useFBX.preload("withbooks.fbx");
+
+export default ExistenceModel;

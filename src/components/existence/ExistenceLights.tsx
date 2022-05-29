@@ -2,7 +2,7 @@ import { useHelper } from "@react-three/drei";
 import { useRef } from "react";
 import { PointLightHelper } from "three";
 
-const Lights = () => {
+const ExistenceLights = () => {
   const pointLight = useRef();
 
   useHelper(pointLight, PointLightHelper, 10, "blue");
@@ -20,4 +20,4 @@ const Lights = () => {
   );
 };
 
-export default Lights;
+export default ExistenceLights;

@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-const Floor = () => {
+const ExistenceFloor = () => {
   return (
     <mesh receiveShadow={true} rotation={new THREE.Euler(Math.PI / 2, 0, 0)}>
       <planeBufferGeometry attach="geometry" args={[100, 100]} />
@@ -9,4 +9,4 @@ const Floor = () => {
   );
 };
 
-export default Floor;
+export default ExistenceFloor;

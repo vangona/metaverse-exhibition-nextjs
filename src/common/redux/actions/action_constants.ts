@@ -1,0 +1,2 @@
+export const ANIMATE_MODEL = "ANIMATE_MODEL";
+export const SHOW_WRITING = "SHOW_WRITING";

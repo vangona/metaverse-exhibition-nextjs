@@ -16,12 +16,6 @@
     "incremental": true,
     "baseUrl": "./src"
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "src/components/three/Cube.tsx",
-    "src/components/three/Lights.tsx"
-, "src/components/three/GLTFModel.js"  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

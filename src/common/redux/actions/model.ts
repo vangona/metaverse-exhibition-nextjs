@@ -1,11 +1,11 @@
 import { animationStateActionType, animationStateType } from "./../types/model";
-import { ANIMATE_MODEL } from "./types_constant";
+import { ANIMATE_MODEL } from "./action_constants";
 
 export const animateModel = (
-  data: animationStateType
+  payload: animationStateType
 ): animationStateActionType => {
   return {
     type: ANIMATE_MODEL,
-    data,
+    payload,
   };
 };

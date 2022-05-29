@@ -1,9 +1,9 @@
 import { writingStateActionType } from "./../types/writing";
-import { SHOW_WRITING } from "./types_constant";
+import { SHOW_WRITING } from "./action_constants";
 
-export const showWriting = (data: boolean): writingStateActionType => {
+export const showWriting = (payload: boolean): writingStateActionType => {
   return {
     type: SHOW_WRITING,
-    data,
+    payload,
   };
 };

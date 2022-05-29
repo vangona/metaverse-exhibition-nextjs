@@ -1,15 +1,19 @@
-import { SHOW_WRITING } from "../actions/types_constant";
+import { SHOW_WRITING } from "../actions/action_constants";
 import { writingStateActionType } from "./../types/writing";
 
+const initialState = {
+  writingState: false,
+};
+
 export const writingReducer = (
-  prevState = [],
+  prevState = initialState,
   action: writingStateActionType
 ) => {
   switch (action.type) {
     case SHOW_WRITING:
       return {
         ...prevState,
-        writingState: action.data,
+        writingState: action.payload,
       };
 
     default:

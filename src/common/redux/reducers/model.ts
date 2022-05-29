@@ -1,15 +1,19 @@
 import { animationStateActionType } from "./../types/model";
-import { ANIMATE_MODEL } from "../actions/types_constant";
+import { ANIMATE_MODEL } from "../actions/action_constants";
+
+const initialState = {
+  animateState: [],
+};
 
 export const modelReducer = (
-  prevState = [],
+  prevState = initialState,
   action: animationStateActionType
 ) => {
   switch (action.type) {
     case ANIMATE_MODEL:
       return {
         ...prevState,
-        animateState: action.data,
+        animateState: action.payload,
       };
 
     default:
