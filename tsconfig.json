@@ -20,8 +20,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/components/three/Cube.js",
-    "src/components/three/Lights.js"
-  ],
+    "src/components/three/Cube.tsx",
+    "src/components/three/Lights.tsx"
+, "src/components/three/GLTFModel.js"  ],
   "exclude": ["node_modules"]
 }

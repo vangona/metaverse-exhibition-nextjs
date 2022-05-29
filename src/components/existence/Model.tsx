@@ -1,19 +1,7 @@
 import { useFBX } from "@react-three/drei";
-import { useState } from "react";
 import * as THREE from "three";
 
 export default function Model() {
-  const threeContainer = document.querySelector("#three-container");
-  const div = document.createElement("div");
-  div.style.width = "80%";
-  div.style.height = "80%";
-  div.style.backgroundColor = "white";
-  div.style.zIndex = "3";
-  div.style.position = "absoluite";
-  div.style.top = "0";
-  div.style.display = "none";
-  threeContainer.appendChild(div);
-
   const ANIMATION_DURATION: number = 2;
 
   const fbx = useFBX("withbooks.fbx");
@@ -35,24 +23,13 @@ export default function Model() {
   const clock = new THREE.Clock();
 
   let animationState = false;
-  let isReverse = false;
 
   window.addEventListener("click", () => {
     if (!animationAction.isRunning()) clickEvent();
   });
 
   mixer.addEventListener("loop", () => {
-    if (!isReverse) {
-      div.style.display = "flex";
-    } else {
-      div.style.display = "none";
-    }
-
     animationAction.paused = true;
-    isReverse != isReverse;
-  });
-  mixer.addEventListener("finished", () => {
-    console.log("finished!");
   });
 
   function clickEvent() {
@@ -77,7 +54,11 @@ export default function Model() {
 
   animate();
 
-  return <primitive object={fbx} />;
+  return (
+    <group>
+      <primitive object={fbx} />
+    </group>
+  );
 }
 
 useFBX.preload("withbooks.fbx");
