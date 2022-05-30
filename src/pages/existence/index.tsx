@@ -5,17 +5,31 @@ import { NextPage } from "next";
 import ExistenceLights from "components/existence/ExistenceLights";
 import ExistenceModel from "components/existence/ExistenceModel";
 import ExistenceWriting from "components/existence/ExistenceWriting";
-import wrapper from "common/redux/store";
-import { showWriting } from "common/redux/actions/writing";
+import { connect } from "react-redux";
+import wrapper, {
+  actionCreators,
+  AppDispatch,
+  SHOW_WRITING,
+} from "common/redux/store";
+import { AnyAction, Dispatch } from "redux";
 
-const Existence: NextPage = (props) => {
-  console.log(props);
+interface State {
+  writingState: boolean;
+  animateState: boolean[];
+  showWriting;
+}
+
+const Existence: NextPage<State> = ({
+  writingState,
+  animateState,
+  showWriting,
+}) => {
   return (
     <div id="three-container" style={{ position: "relative" }}>
       <Canvas camera={{ position: [1, 1, 1] }}>
         <OrbitControls />
-        <ExistenceModel />
-        <ExistenceWriting />
+        <ExistenceModel showWriting={showWriting} writingState={writingState} />
+        <ExistenceWriting writingState={writingState} />
         <ExistenceLights />
         <ExistenceFloor />
       </Canvas>
@@ -23,4 +37,19 @@ const Existence: NextPage = (props) => {
   );
 };
 
-export default Existence;
+export const getInitialProps = wrapper.getInitialPageProps((store) => () => {
+  store.dispatch({
+    type: SHOW_WRITING,
+    payload: false,
+  });
+});
+
+const mapStateToProps = (state: State) => state;
+const mapDispatchToProps = (dispatch: AppDispatch) => {
+  return {
+    showWriting: (payload: boolean) =>
+      dispatch(actionCreators.showWriting(payload)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Existence);

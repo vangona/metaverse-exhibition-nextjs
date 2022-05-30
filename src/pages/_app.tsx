@@ -4,8 +4,9 @@ import { GlobalStyle } from "../../styles/global-style";
 import { ThemeProvider } from "styled-components";
 import { theme } from "../../styles/theme";
 import wrapper from "common/redux/store";
+import { FC } from "react";
 
-const App = ({ Component, pageProps }: AppProps) => (
+const App: FC<AppProps> = ({ Component, pageProps }: AppProps) => (
   <ThemeProvider theme={theme}>
     <GlobalStyle />
     <Component {...pageProps} />

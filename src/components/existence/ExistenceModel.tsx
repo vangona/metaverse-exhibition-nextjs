@@ -2,7 +2,15 @@ import { useFBX } from "@react-three/drei";
 import { FunctionComponent } from "react";
 import * as THREE from "three";
 
-const ExistenceModel: FunctionComponent = () => {
+interface State {
+  writingState: boolean;
+  showWriting;
+}
+
+const ExistenceModel: FunctionComponent<State> = ({
+  writingState,
+  showWriting,
+}) => {
   const ANIMATION_DURATION: number = 2;
 
   const fbx = useFBX("withbooks.fbx");
@@ -34,6 +42,7 @@ const ExistenceModel: FunctionComponent = () => {
   });
 
   function clickEvent() {
+    showWriting(!writingState);
     animationState = true;
 
     if (animationAction.paused) {
