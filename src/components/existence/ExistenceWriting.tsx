@@ -7,15 +7,17 @@ const ExistenceWriting: FunctionComponent = () => {
       className="container"
       center={true}
       style={{
-        width: "40vw",
-        height: "40vh",
+        width: "80vw",
+        height: "80vh",
         backgroundColor: "#ebebeb",
+        borderRadius: "10px",
       }}
     >
       <div id="description">
         <p>
-          텅 빈 냉장고 속에는 음식 대신 생각이 들어있습니다. 하나 꺼내려다가
-          다시 제자리에 돌려놓습니다. 생각은 허기를 채워주지 못합니다.
+          텅 빈 냉장고 속에는 음식 대신 생각이 들어있습니다. <br />
+          하나 꺼내려다가 다시 제자리에 돌려놓습니다. 생각은 허기를 채워주지
+          못합니다.
         </p>
         <p>*𝐥`&apos;`𝐞𝐱𝐢𝐬𝐭𝐞𝐧𝐜𝐞 𝐩𝐫é𝐜è𝐝𝐞 𝐥`&apos;`𝐞𝐬𝐬𝐞𝐧𝐜𝐞,</p>
         <p>
@@ -42,6 +44,18 @@ const ExistenceWriting: FunctionComponent = () => {
           그런 이유로 오늘 메뉴는 아직 간이 덜 된 심리학입니다. 맛있게 드세요.
         </p>
       </div>
+      <style jsx>{`
+        #description {
+          padding: 1rem;
+          line-height: 160%;
+          margin-top: 1rem;
+        }
+
+        p {
+          margin-bottom: 1rem;
+          text-indent: 0.5rem;
+        }
+      `}</style>
     </Html>
   );
 };

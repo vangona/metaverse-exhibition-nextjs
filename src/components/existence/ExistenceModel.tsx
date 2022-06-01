@@ -1,7 +1,8 @@
 import { useFBX } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useEffect } from "react";
 import * as THREE from "three";
+import { AnimationAction } from "three";
 
 interface State {
   writingState: boolean;
@@ -12,8 +13,8 @@ const ExistenceModel: FunctionComponent<State> = ({
   writingState,
   toggleWritingState,
 }) => {
-  const [isAnimationReady, setIsAnimationReady] = useState(false);
-  const [animationAction, setAnimationAction] = useState(null);
+  let isReverse = false;
+  let isRunning = false;
   const ANIMATION_DURATION: number = 2;
 
   const clock = new THREE.Clock();
@@ -24,41 +25,30 @@ const ExistenceModel: FunctionComponent<State> = ({
 
   // setting animation
   const mixer = new THREE.AnimationMixer(fbx);
-  const openAnimation = mixer.clipAction((fbx as THREE.Object3D).animations[0]);
-  openAnimation.setDuration(ANIMATION_DURATION);
-  const closeAnimation = mixer.clipAction(
-    (fbx as THREE.Object3D).animations[1]
-  );
-  closeAnimation.setDuration(ANIMATION_DURATION);
-
-  window.addEventListener("click", () => {
-    if (!animationAction.isRunning() && isAnimationReady) clickEvent();
-  });
-
-  mixer.addEventListener("loop", () => {
-    if (animationAction === openAnimation) {
-      setAnimationAction(closeAnimation);
-    } else {
-      setAnimationAction(openAnimation);
-    }
-
-    setIsAnimationReady(true);
-    animationAction.paused = true;
+  const animationActions: AnimationAction[] = [];
+  (fbx as THREE.Object3D).animations.forEach((animationAction) => {
+    const clipAction = mixer.clipAction(animationAction);
+    clipAction.setDuration(ANIMATION_DURATION);
+    clipAction.clampWhenFinished = true;
+    clipAction.repetitions = 1;
+    animationActions.push(clipAction);
   });
 
   function clickEvent() {
-    setIsAnimationReady(false);
-    animationAction.paused = false;
-    animationAction.play();
+    isRunning = true;
+    animateAction();
     setTimeout(() => {
+      isRunning = false;
       toggleWritingState(!writingState);
     }, ANIMATION_DURATION * 1000);
   }
 
-  function setAnimation(animation) {
-    setAnimationAction(animation);
-    setIsAnimationReady(true);
-    console.log(animation);
+  function animateAction() {
+    if (isReverse) {
+      animationActions[0].play();
+    } else {
+      animationActions[1].play();
+    }
   }
 
   useFrame(() => {
@@ -66,8 +56,10 @@ const ExistenceModel: FunctionComponent<State> = ({
   });
 
   useEffect(() => {
-    setAnimation(openAnimation);
-  }, []);
+    window.addEventListener("click", () => {
+      if (!isRunning) clickEvent();
+    });
+  });
 
   return (
     <>
@@ -76,6 +68,6 @@ const ExistenceModel: FunctionComponent<State> = ({
   );
 };
 
-useFBX.preload("withbooks.fbx");
+useFBX.preload("existence.fbx");
 
 export default ExistenceModel;

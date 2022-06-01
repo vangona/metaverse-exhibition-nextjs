@@ -11,9 +11,8 @@ const Existence: NextPage = () => {
   const [writingState, setWritingState] = useState(false);
   const camera = useRef();
 
-  const toggleWritingState = (data) => {
+  const toggleWritingState = (data: boolean) => {
     setWritingState(data);
-    console.log(camera);
   };
 
   return (

@@ -13,7 +13,7 @@ const ExistenceLights = () => {
         castShadow
         ref={pointLight}
         position={[3, 7, 3]}
-        color={"#FFAC67"}
+        color={"#ddbfaa"}
       />
       <ambientLight color={"#f5d4ba"} intensity={0.1} />
     </group>
