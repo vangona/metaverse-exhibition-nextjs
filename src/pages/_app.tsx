@@ -4,12 +4,14 @@ import { GlobalStyle } from "../../styles/global-style";
 import { ThemeProvider } from "styled-components";
 import { theme } from "../../styles/theme";
 import wrapper from "common/redux/store";
-import { FC } from "react";
+import React, { FC } from "react";
 
 const App: FC<AppProps> = ({ Component, pageProps }: AppProps) => (
-  <ThemeProvider theme={theme}>
-    <GlobalStyle />
-    <Component {...pageProps} />
-  </ThemeProvider>
+  <React.StrictMode>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Component {...pageProps} />
+    </ThemeProvider>
+  </React.StrictMode>
 );
 export default wrapper.withRedux(App);

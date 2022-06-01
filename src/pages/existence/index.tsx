@@ -1,35 +1,38 @@
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import ExistenceFloor from "components/existence/ExistenceFloor";
 import { NextPage } from "next";
 import ExistenceLights from "components/existence/ExistenceLights";
 import ExistenceModel from "components/existence/ExistenceModel";
 import ExistenceWriting from "components/existence/ExistenceWriting";
-import { connect } from "react-redux";
-import wrapper, {
-  actionCreators,
-  AppDispatch,
-  SHOW_WRITING,
-} from "common/redux/store";
-import { AnyAction, Dispatch } from "redux";
+import { useRef, useState } from "react";
 
-interface State {
-  writingState: boolean;
-  animateState: boolean[];
-  showWriting;
-}
+const Existence: NextPage = () => {
+  const [writingState, setWritingState] = useState(false);
+  const camera = useRef();
 
-const Existence: NextPage<State> = ({
-  writingState,
-  animateState,
-  showWriting,
-}) => {
+  const toggleWritingState = (data) => {
+    setWritingState(data);
+    console.log(camera);
+  };
+
   return (
     <div id="three-container" style={{ position: "relative" }}>
-      <Canvas camera={{ position: [1, 1, 1] }}>
+      <Canvas camera={{ manual: true }}>
+        <PerspectiveCamera
+          ref={camera}
+          position={[9, 5, 2]}
+          rotation={[-1, 1.3, 1]}
+          quaternion={[-0.1, 0.6, 0.1, 0.8]}
+          makeDefault
+          manual
+        />
         <OrbitControls />
-        <ExistenceModel showWriting={showWriting} writingState={writingState} />
-        <ExistenceWriting writingState={writingState} />
+        <ExistenceModel
+          toggleWritingState={toggleWritingState}
+          writingState={writingState}
+        />
+        {writingState && <ExistenceWriting />}
         <ExistenceLights />
         <ExistenceFloor />
       </Canvas>
@@ -37,19 +40,4 @@ const Existence: NextPage<State> = ({
   );
 };
 
-export const getInitialProps = wrapper.getInitialPageProps((store) => () => {
-  store.dispatch({
-    type: SHOW_WRITING,
-    payload: false,
-  });
-});
-
-const mapStateToProps = (state: State) => state;
-const mapDispatchToProps = (dispatch: AppDispatch) => {
-  return {
-    showWriting: (payload: boolean) =>
-      dispatch(actionCreators.showWriting(payload)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Existence);
+export default Existence;

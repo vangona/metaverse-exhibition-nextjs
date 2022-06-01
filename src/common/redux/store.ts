@@ -7,7 +7,7 @@ import { Context, createWrapper, HYDRATE } from "next-redux-wrapper";
 export const ANIMATE_MODEL = "ANIMATE_MODEL";
 export const SHOW_WRITING = "SHOW_WRITING";
 
-export interface State {
+export interface initialState {
   writingState: boolean;
   animateState: boolean[];
 }
@@ -15,7 +15,7 @@ export interface State {
 // 추후 reducer 확장을 위해, combineReducers 사용
 // HYDRATION을 위해 초기값을 설정해준다.
 const rootReducer = (
-  state: State = {
+  state: initialState = {
     writingState: false,
     animateState: [],
   },
